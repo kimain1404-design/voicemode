@@ -1,0 +1,239 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>보이스PT · 수강생에게 드리는 혜택</title>
+<script>document.documentElement.classList.add('js');</script>
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
+<style>
+html, body { margin: 0; padding: 0; overflow: hidden; background: #ffb595; }
+/* ===== 보이스PT · 수강생 혜택 섹션 =====
+   반응형 기준: 섹션 자체 너비(container query)
+   PC ≥ 1024px / 태블릿 600–1023px / 모바일 < 600px          */
+
+.vpt-benefit {
+  --vpt-orange: #ff7443;
+  --vpt-line: #ff9b78;
+  --vpt-base: #ff9a73;
+  --vpt-title-bg: #ffe2d7;
+  --vpt-ink: #161616;
+  --vpt-sub: #5b5b5b;
+
+  container-type: inline-size;
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+  font-family: "Pretendard", "Pretendard Variable", -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", sans-serif;
+  color: var(--vpt-ink);
+  word-break: keep-all;
+  -webkit-font-smoothing: antialiased;
+  background:
+    linear-gradient(rgba(255,255,255,.38) 1px, transparent 1px) 0 0 / 9% 9.5%,
+    linear-gradient(90deg, rgba(255,255,255,.38) 1px, transparent 1px) 0 0 / 9% 9.5%,
+    linear-gradient(180deg, #fff6f2 0%, #ffe9e0 42%, #ffc7b0 78%, #ffb595 100%);
+}
+.vpt-benefit *, .vpt-benefit *::before, .vpt-benefit *::after { box-sizing: border-box; }
+
+/* ---------- 장식 ---------- */
+.vpt-benefit__deco { position: absolute; inset: 0; z-index: -1; pointer-events: none; }
+.vpt-benefit__ring {
+  position: absolute; border-radius: 50%;
+  border: 3.2cqw solid rgba(255,255,255,.22);
+}
+.vpt-benefit__ring--a { width: 46cqw; aspect-ratio: 1; right: -8cqw; top: -24cqw; }
+.vpt-benefit__ring--b { width: 26cqw; aspect-ratio: 1; right: 4cqw; top: 14cqw; border-width: 2.2cqw; border-color: rgba(255,255,255,.16); }
+.vpt-benefit__star { position: absolute; fill: #fff; opacity: .9; animation: vpt-twinkle 3.6s ease-in-out infinite; }
+.vpt-benefit__star:nth-child(2n) { animation-delay: -1.2s; animation-duration: 4.4s; }
+.vpt-benefit__star:nth-child(3n) { animation-delay: -2.3s; }
+.vpt-benefit__dot { position: absolute; border-radius: 50%; background: #fff; opacity: .85; }
+
+/* ---------- 레이아웃 (PC 기본) ---------- */
+.vpt-benefit__inner {
+  position: relative;
+  max-width: 840px;
+  margin: 0 auto;
+  padding: 40px 20px 64px;
+  display: flex; flex-direction: column; align-items: center;
+}
+.vpt-benefit__title {
+  margin: 0 0 26px;
+  padding: 8px 36px 10px;
+  background: var(--vpt-title-bg);
+  border-inline: 4px solid #ff8a63;
+  font-size: 30px; font-weight: 600; line-height: 1.3; letter-spacing: -0.035em;
+  text-align: center;
+}
+.vpt-benefit__card {
+  width: 100%;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 365px;
+  gap: 48px;
+  align-items: center;
+  padding: 26px 32px 26px 32px;
+  background: #fff;
+  border: 3px solid var(--vpt-line);
+  border-radius: 22px;
+  box-shadow: 0 12px 0 var(--vpt-base);
+}
+.vpt-benefit__list { list-style: none; margin: 0; padding: 0; }
+.vpt-benefit__item { padding: 0 0 26px; border-bottom: 1px solid var(--vpt-line); }
+.vpt-benefit__item + .vpt-benefit__item { padding-top: 22px; }
+
+.vpt-benefit__badge {
+  display: inline-flex; align-items: center; gap: .32em;
+  padding: .2em .6em .22em;
+  background: var(--vpt-orange); color: #fff;
+  border-radius: 2px;
+  font-size: 16px; font-weight: 600; letter-spacing: -0.01em; line-height: 1.4;
+}
+.vpt-benefit__num {
+  display: inline-grid; place-items: center;
+  width: 1.15em; height: 1.15em; border-radius: 50%;
+  background: #fff; color: var(--vpt-orange);
+  font-size: .9em; font-weight: 600; font-style: normal; line-height: 1;
+}
+.vpt-benefit__head { margin: 18px 0 0; display: flex; flex-direction: column; gap: 6px; }
+.vpt-benefit__name { font-size: 25px; font-weight: 600; letter-spacing: -0.04em; line-height: 1.3; }
+.vpt-benefit__desc { font-size: 18px; font-weight: 400; color: var(--vpt-sub); letter-spacing: -0.03em; line-height: 1.45; }
+
+.vpt-benefit__media {
+  position: relative;
+  aspect-ratio: 365 / 270;
+  border-radius: 10px;
+  overflow: hidden;
+  background: #f5f6fc;
+}
+.vpt-benefit__media video {
+  position: absolute; inset: 0;
+  width: 100%; height: 100%;
+  object-fit: cover; object-position: 53% 50%;
+  display: block;
+}
+
+/* ---------- 태블릿 ---------- */
+@container (max-width: 1023px) {
+  .vpt-benefit__inner { max-width: none; padding: 9.5cqw 5.7cqw 11cqw; }
+  .vpt-benefit__title { font-size: 5.7cqw; padding: 1.3cqw 6.2cqw 1.6cqw; border-inline-width: .45cqw; margin-bottom: 5.6cqw; }
+  .vpt-benefit__card {
+    grid-template-columns: 1fr; gap: 0;
+    padding: 5.2cqw 4.6cqw 4.8cqw;
+    border-width: .38cqw; border-radius: 2.5cqw;
+    box-shadow: 0 1.5cqw 0 var(--vpt-base);
+  }
+  .vpt-benefit__item { padding-bottom: 4.6cqw; border-bottom-width: max(1px, .12cqw); }
+  .vpt-benefit__item + .vpt-benefit__item { padding-top: 3.7cqw; }
+  .vpt-benefit__badge { font-size: 2.75cqw; }
+  .vpt-benefit__head { margin-top: 3cqw; flex-direction: row; flex-wrap: wrap; align-items: baseline; column-gap: 1.8cqw; row-gap: .6cqw; }
+  .vpt-benefit__name { font-size: 3.9cqw; }
+  .vpt-benefit__desc { font-size: 2.6cqw; }
+  .vpt-benefit__media { margin-top: 3.7cqw; aspect-ratio: 1278 / 940; border-radius: 1.4cqw; }
+}
+
+/* ---------- 모바일 ---------- */
+@container (max-width: 599px) {
+  .vpt-benefit__inner { padding: 12cqw 5cqw 14cqw; }
+  .vpt-benefit__title { font-size: 6.6cqw; padding: 1.8cqw 6cqw 2.2cqw; border-inline-width: 1cqw; margin-bottom: 7cqw; }
+  .vpt-benefit__card { padding: 7cqw 5.6cqw 6cqw; border-width: .8cqw; border-radius: 4.5cqw; box-shadow: 0 2.6cqw 0 var(--vpt-base); }
+  .vpt-benefit__item { padding-bottom: 6cqw; }
+  .vpt-benefit__item + .vpt-benefit__item { padding-top: 5.4cqw; }
+  .vpt-benefit__badge { font-size: 3.8cqw; }
+  .vpt-benefit__head { margin-top: 3.6cqw; flex-direction: column; align-items: flex-start; row-gap: 1.4cqw; }
+  .vpt-benefit__name { font-size: 5.8cqw; }
+  .vpt-benefit__desc { font-size: 4.1cqw; }
+  .vpt-benefit__media { margin-top: 5.4cqw; aspect-ratio: 4 / 3; border-radius: 2.6cqw; }
+}
+
+/* ---------- 움직임: 스크롤로 섹션이 보일 때 (JS 없이 CSS만) ---------- */
+@keyframes vpt-twinkle { 0%,100% { transform: scale(1) rotate(0); opacity: .9; } 50% { transform: scale(.55) rotate(25deg); opacity: .35; } }
+@keyframes vpt-title-in { from { opacity: 0; transform: translateY(-14px) scaleX(.86); } to { opacity: 1; transform: none; } }
+@keyframes vpt-card-in {
+  from { opacity: 0; transform: translateY(40px); box-shadow: 0 0 0 var(--vpt-base); }
+  70%  { opacity: 1; }
+  to   { opacity: 1; transform: none; }
+}
+@keyframes vpt-item-in { from { opacity: 0; transform: translateX(-18px); } to { opacity: 1; transform: none; } }
+@keyframes vpt-media-in { from { opacity: 0; clip-path: inset(0 0 0 100%); } to { opacity: 1; clip-path: inset(0 0 0 0); } }
+
+/* 섹션이 화면(라이브클래스 페이지)에 보이면 .is-in 이 붙으면서 재생 */
+@media (prefers-reduced-motion: no-preference) {
+  .js .vpt-benefit__title { animation: vpt-title-in .7s cubic-bezier(.2,.8,.2,1) both paused; }
+  .js .vpt-benefit__card  { animation: vpt-card-in .9s cubic-bezier(.2,.8,.2,1) .15s both paused; }
+  .js .vpt-benefit__item  { animation: vpt-item-in .7s cubic-bezier(.2,.8,.2,1) .45s both paused; }
+  .js .vpt-benefit__item + .vpt-benefit__item { animation-delay: .6s; }
+  .js .vpt-benefit__media { animation: vpt-media-in .9s cubic-bezier(.2,.8,.2,1) .55s both paused; }
+  .js .vpt-benefit.is-in .vpt-benefit__title,
+  .js .vpt-benefit.is-in .vpt-benefit__card,
+  .js .vpt-benefit.is-in .vpt-benefit__item,
+  .js .vpt-benefit.is-in .vpt-benefit__media { animation-play-state: running; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .vpt-benefit__star { animation: none; }
+}
+</style>
+</head>
+<body>
+<section class="vpt-benefit" aria-labelledby="vpt-benefit-title">
+  <div class="vpt-benefit__deco" aria-hidden="true">
+    <span class="vpt-benefit__ring vpt-benefit__ring--a"></span>
+    <span class="vpt-benefit__ring vpt-benefit__ring--b"></span>
+    <svg class="vpt-benefit__star" viewBox="0 0 24 24" style="width:2.6cqw;left:12%;top:58%"><path d="M12 0C13 8 16 11 24 12C16 13 13 16 12 24C11 16 8 13 0 12C8 11 11 8 12 0Z"/></svg>
+    <svg class="vpt-benefit__star" viewBox="0 0 24 24" style="width:1.3cqw;left:14%;top:30%"><path d="M12 0C13 8 16 11 24 12C16 13 13 16 12 24C11 16 8 13 0 12C8 11 11 8 12 0Z"/></svg>
+    <svg class="vpt-benefit__star" viewBox="0 0 24 24" style="width:2.4cqw;right:15%;top:22%"><path d="M12 0C13 8 16 11 24 12C16 13 13 16 12 24C11 16 8 13 0 12C8 11 11 8 12 0Z"/></svg>
+    <svg class="vpt-benefit__star" viewBox="0 0 24 24" style="width:1.3cqw;right:9%;top:74%"><path d="M12 0C13 8 16 11 24 12C16 13 13 16 12 24C11 16 8 13 0 12C8 11 11 8 12 0Z"/></svg>
+    <span class="vpt-benefit__dot" style="width:.6cqw;aspect-ratio:1;left:10%;top:23%"></span>
+    <span class="vpt-benefit__dot" style="width:.4cqw;aspect-ratio:1;left:16.6%;top:17%"></span>
+    <span class="vpt-benefit__dot" style="width:.6cqw;aspect-ratio:1;right:7%;top:66%"></span>
+  </div>
+
+  <div class="vpt-benefit__inner">
+    <h2 class="vpt-benefit__title" id="vpt-benefit-title">수강생에게 드리는 혜택!</h2>
+
+    <div class="vpt-benefit__card">
+      <ul class="vpt-benefit__list">
+        <li class="vpt-benefit__item">
+          <span class="vpt-benefit__badge">Special Gift <i class="vpt-benefit__num">1</i></span>
+          <p class="vpt-benefit__head">
+            <strong class="vpt-benefit__name">보이스PT TO DO LIST</strong>
+            <span class="vpt-benefit__desc">매일 조금씩, 달라지는 나의 목소리!</span>
+          </p>
+        </li>
+        <li class="vpt-benefit__item">
+          <span class="vpt-benefit__badge">Special Gift <i class="vpt-benefit__num">2</i></span>
+          <p class="vpt-benefit__head">
+            <strong class="vpt-benefit__name">연습프로그램 제공</strong>
+            <span class="vpt-benefit__desc">체계적인 훈련, 자신감 있는 목소리!</span>
+          </p>
+        </li>
+      </ul>
+
+      <div class="vpt-benefit__media">
+        <video autoplay muted loop playsinline preload="auto" poster="benefit-poster.jpg" aria-label="연습프로그램 화면: 문장의 억양 곡선을 따라 구절별로 연습하는 모습">
+          <source src="benefit-video.mp4" type="video/mp4">
+        </video>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+(function () {
+  var sec = document.querySelector('.vpt-benefit');
+  var video = sec.querySelector('video');
+  if (!('IntersectionObserver' in window)) { sec.classList.add('is-in'); return; }
+  // 아이프레임 안에서도 '라이브클래스 화면' 기준으로 보이는지 판단
+  new IntersectionObserver(function (entries) {
+    entries.forEach(function (e) {
+      if (e.isIntersecting) {
+        sec.classList.add('is-in');
+        var p = video.play(); if (p && p.catch) p.catch(function () {});
+      } else if (sec.classList.contains('is-in')) {
+        video.pause();
+      }
+    });
+  }, { threshold: 0.2 }).observe(sec);
+})();
+</script>
+</body>
+</html>

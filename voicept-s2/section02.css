@@ -202,21 +202,47 @@
 }
 .vpt .vpt-hl__txt { position: relative; display: inline-block; }
 
-/* ---------- MIC + WAVE ---------- */
+/* ---------- MIC + WAVE: remove hard white JPG edges ---------- */
 .vpt .vpt-voice {
   position: relative;
   width: calc(581.7 * var(--s));
   aspect-ratio: 996 / 867;
   margin: calc(29 * var(--s)) auto 0;
+  overflow: visible;
+  isolation: isolate;
 }
+
+/* Continuous halo is drawn outside the original JPG box. */
+.vpt .vpt-voice::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  pointer-events: none;
+  inset: -66% -94%;
+  border-radius: 50%;
+  background: radial-gradient(ellipse 49% 47% at 50% 51%,
+    rgba(62, 132, 255, 0.25) 0%,
+    rgba(72, 141, 255, 0.17) 38%,
+    rgba(100, 166, 255, 0.07) 63%,
+    rgba(125, 185, 255, 0) 100%);
+}
+
+/* Keep the microphone, fade the JPG's opaque white outer rectangle. */
 .vpt .vpt-mic {
   position: absolute;
   inset: 0;
+  z-index: 0;
   background: url("img/mic.jpg") center / 100% 100% no-repeat;
+  -webkit-mask-image: radial-gradient(ellipse 70% 55% at 50% 50%,
+    #000 0%, #000 60%, rgba(0, 0, 0, 0.9) 68%, rgba(0, 0, 0, 0.45) 81%, transparent 90%);
+  mask-image: radial-gradient(ellipse 70% 55% at 50% 50%,
+    #000 0%, #000 60%, rgba(0, 0, 0, 0.9) 68%, rgba(0, 0, 0, 0.45) 81%, transparent 90%);
+  mix-blend-mode: multiply;
 }
 .vpt .vpt-bar {
   position: absolute;
   display: block;
+  z-index: 1;
   border-radius: 999px;
   background: #4689ff;
   transform-origin: 50% 50%;

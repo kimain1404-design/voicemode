@@ -295,9 +295,6 @@ img {
   opacity: 0;
   transform: translateY(calc(24 * var(--u)));
 }
-.js .s1__tag {
-  clip-path: inset(0 100% 0 0 round calc(36 * var(--u)));
-}
 .play .s1__art {
   transform: none;
   transition: transform 2s var(--ease);
@@ -333,10 +330,6 @@ img {
   transition:
     opacity 0.8s ease 0.4s,
     transform 1s var(--ease) 0.4s;
-}
-.play .s1__tag {
-  clip-path: inset(0 0 0 0 round calc(36 * var(--u)));
-  transition: clip-path 0.9s var(--ease) 1s;
 }
 
 /* ---------- tablet + mobile (mobile art) ---------- */
@@ -402,12 +395,6 @@ img {
   }
   .s1__tag span {
     padding: 0 calc(30 * var(--u)) 0 calc(30 * var(--u));
-  }
-  .js .s1__tag {
-    clip-path: inset(0 100% 0 0);
-  }
-  .play .s1__tag {
-    clip-path: inset(0 0 0 0);
   }
 }
 @media (max-width: 767px) {

@@ -202,8 +202,7 @@
 }
 .vpt .vpt-hl__txt { position: relative; display: inline-block; }
 
-/* ---------- MIC + WAVE ---------- */
-/* 이미지 가장자리의 빛을 숨기지 않고, 바깥쪽까지 부드럽게 연결 */
+/* ---------- MIC + WAVE: 흰 JPG 배경 제거 + 영역 밖까지 확장되는 후광 ---------- */
 .vpt .vpt-voice {
   position: relative;
   width: calc(581.7 * var(--s));
@@ -212,27 +211,28 @@
   overflow: visible;
   isolation: isolate;
 }
-/* JPG 이미지 영역 바깥쪽까지 이어지는 확장 후광 */
+/* 실제 그림자/빛은 이미지 영역보다 크게 확장. 흰색 가림 레이어 없음 */
 .vpt .vpt-voice::before {
   content: "";
   position: absolute;
-  inset: -33% -34%;
   z-index: 0;
+  inset: -67% -95%;
   pointer-events: none;
-  background: radial-gradient(ellipse 39% 38% at 50% 49%,
-    rgba(58, 126, 255, 0.27) 0%,
-    rgba(73, 139, 255, 0.19) 42%,
-    rgba(100, 163, 255, 0.09) 68%,
-    rgba(120, 180, 255, 0) 100%);
-  filter: blur(calc(9 * var(--s)));
+  border-radius: 50%;
+  background: radial-gradient(ellipse 44% 41% at 50% 50%,
+    rgba(70, 136, 255, 0.28) 0%,
+    rgba(92, 155, 255, 0.17) 35%,
+    rgba(110, 170, 255, 0.095) 57%,
+    rgba(125, 185, 255, 0.045) 72%,
+    rgba(125, 185, 255, 0) 100%);
 }
+/* 기존 mic.jpg는 흰색이 불투명하여 후광을 덮음.
+   흰색을 알파로 제거한 PNG를 사용하여 아래 빛이 그대로 보이게 함. */
 .vpt .vpt-mic {
   position: absolute;
   inset: 0;
   z-index: 1;
-  background: url("img/mic.jpg") center / 100% 100% no-repeat;
-  /* 불투명한 JPG의 흰색 영역에도 후광이 자연스럽게 비치도록 함 */
-  mix-blend-mode: multiply;
+  background: url("img/mic-transparent.png") center / 100% 100% no-repeat;
 }
 .vpt .vpt-bar {
   position: absolute;
